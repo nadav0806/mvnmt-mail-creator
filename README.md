@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MVMNT Mail Creator
 
-## Getting Started
+A Vercel-ready Next.js app that creates email accounts through your mail service.
 
-First, run the development server:
+## What it does
+
+- Collects first and last name
+- Proxies a POST request to your account creation endpoint
+- Displays the returned email, password, and display name
+- Includes a one-click copy button for credentials
+- Keeps the frontend compatible with Vercel by using a route handler proxy
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Endpoint
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app proxies requests to:
 
-## Learn More
+```text
+POST https://publish.mvmnt.world/create-account
+```
 
-To learn more about Next.js, take a look at the following resources:
+Request body:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+{
+  "firstName": "noah",
+  "lastName": "levine"
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Example success response:
 
-## Deploy on Vercel
+```json
+{
+  "success": true,
+  "email": "noah.levine@themailman.info",
+  "password": "C7wsQHlKL^7L",
+  "displayName": "noah levine"
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Build for production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm start
+```
+
+## Deploy to Vercel
+
+This app is compatible with Vercel as-is:
+
+- uses the App Router
+- uses a route handler for the upstream API proxy
+- has no custom server requirement
+- can be deployed directly from GitHub
