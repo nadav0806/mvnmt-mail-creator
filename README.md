@@ -1,6 +1,6 @@
-# MVMNT Mail Creator
+# Mail account creator
 
-A Vercel-ready Next.js app that creates email accounts through your mail service.
+A simple Next.js app for creating email accounts through your mail service.
 
 ## What it does
 
@@ -8,7 +8,6 @@ A Vercel-ready Next.js app that creates email accounts through your mail service
 - Proxies a POST request to your account creation endpoint
 - Displays the returned email, password, and display name
 - Includes a one-click copy button for credentials
-- Keeps the frontend compatible with Vercel by using a route handler proxy
 
 ## Local development
 
@@ -54,11 +53,6 @@ npm run build
 npm start
 ```
 
-## Deploy to Vercel
+## Deploy
 
-This app is compatible with Vercel as-is:
-
-- uses the App Router
-- uses a route handler for the upstream API proxy
-- has no custom server requirement
-- can be deployed directly from GitHub
+This app can be deployed directly from GitHub.

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MVMNT Mail Creator",
-  description: "Create email accounts from a Vercel-ready Next.js app.",
+  title: "Mail account creator",
+  description: "Create email accounts from a simple Next.js app.",
 };
 
 export default function RootLayout({
