@@ -25,11 +25,20 @@ export default function Home() {
     setResponse(null);
     setCopied(false);
 
+    const trimmedFirstName = firstName.trim();
+    const trimmedLastName = lastName.trim();
+
+    if (!trimmedFirstName || !trimmedLastName) {
+      setError("Please enter both a first and last name.");
+      setLoading(false);
+      return;
+    }
+
     try {
-      const res = await fetch("/api/create-account", {
+      const res = await fetch("https://publish.mvmnt.world/create-account", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, lastName }),
+        body: JSON.stringify({ firstName: trimmedFirstName, lastName: trimmedLastName }),
       });
 
       const data = (await res.json()) as CreateAccountResponse;
@@ -89,7 +98,6 @@ export default function Home() {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     className="rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100"
-                    placeholder="Noah"
                     required
                   />
                 </label>
@@ -100,7 +108,6 @@ export default function Home() {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     className="rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100"
-                    placeholder="Levine"
                     required
                   />
                 </label>
@@ -114,7 +121,7 @@ export default function Home() {
                 {loading ? "Creating account..." : "Create account"}
               </button>
               <p className="text-xs leading-5 text-slate-500">
-                Leave the fields blank if you want to start fresh.
+                Fill in both names, then create the account.
               </p>
             </form>
 
