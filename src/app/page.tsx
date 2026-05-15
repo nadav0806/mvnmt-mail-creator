@@ -20,22 +20,22 @@ export default function Home() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const trimmedFirstName = firstName.trim();
+    const trimmedLastName = lastName.trim();
+
+    if (!trimmedFirstName && !trimmedLastName) {
+      setError("Please enter a first and last name.");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setResponse(null);
     setCopied(false);
 
-    const trimmedFirstName = firstName.trim();
-    const trimmedLastName = lastName.trim();
-
-    if (!trimmedFirstName || !trimmedLastName) {
-      setError("Please enter both a first and last name.");
-      setLoading(false);
-      return;
-    }
-
     try {
-      const res = await fetch("https://publish.mvmnt.world/create-account", {
+      const res = await fetch("/api/create-account", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstName: trimmedFirstName, lastName: trimmedLastName }),
