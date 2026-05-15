@@ -11,8 +11,8 @@ type CreateAccountResponse = {
 };
 
 export default function Home() {
-  const [firstName, setFirstName] = useState("Noah");
-  const [lastName, setLastName] = useState("Levine");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<CreateAccountResponse | null>(null);
   const [error, setError] = useState("");
@@ -113,6 +113,9 @@ export default function Home() {
               >
                 {loading ? "Creating account..." : "Create account"}
               </button>
+              <p className="text-xs leading-5 text-slate-500">
+                Leave the fields blank if you want to start fresh.
+              </p>
             </form>
 
             {error ? (
